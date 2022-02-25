@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Damageable
+  - JoyStickThumbStick
+  - WorldAreaTag
+  - Triggers
+  - Cutscene
   layers:
   - Default
   - TransparentFX
@@ -13,14 +18,14 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Objects
+  - Cast
+  - Player
+  - GroundJumpOff
+  - Enemy
+  - StepOnButton
+  - DeathZone
   - 
   - 
   - 
@@ -40,4 +45,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BackGround
+    uniqueID: 2760487709
+    locked: 0
+  - name: Level
+    uniqueID: 3473995201
+    locked: 0
+  - name: Objects
+    uniqueID: 2929636911
+    locked: 0
+  - name: Enemy
+    uniqueID: 3239331075
+    locked: 0
+  - name: Player
+    uniqueID: 4211762657
+    locked: 0
+  - name: ForeGround
+    uniqueID: 960644119
+    locked: 0
+  - name: UI
+    uniqueID: 3273559077
     locked: 0

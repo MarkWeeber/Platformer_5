@@ -12,7 +12,7 @@ namespace Platformer.Inputs{
         public CanvasRenderer cv = null;
         private void Start()
         {
-
+            
         }
 
         public virtual void OnPointerDown(PointerEventData eventData)

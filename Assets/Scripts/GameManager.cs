@@ -50,6 +50,7 @@ namespace Platformer.Inputs
 
         private void Start()
         {
+            //Debug.Log(Application.persistentDataPath);
             currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
             totalAmountOfScenes = SceneManager.sceneCountInBuildSettings;
             QualitySettings.vSyncCount = 0;

@@ -29,6 +29,7 @@ namespace Platformer.Inputs{
         private bool manualAttack = false;
         private bool manualAltAttack = false;
         private bool manualJump = false;
+        private bool isCrouching = false;
         private Vector2 overlapCircleTransform = Vector2.zero;
         private int playerLayer;
         private int groundJumpOffLayer;
@@ -77,7 +78,7 @@ namespace Platformer.Inputs{
                 // tracking jump
                 if((Input.GetButtonDown(GlobalStringVars.JUMP_BUTTON) || manualJump) && isGrounded && !attacking && !altAttacking)
                 {
-                    if(verticalInput < -0.51f)
+                    if(isCrouching)
                     {
                         JumpOff();
                     }
@@ -89,7 +90,7 @@ namespace Platformer.Inputs{
                     }
                 }
                 // tracking fire button - attacking
-                if((Input.GetButtonDown(GlobalStringVars.FIRE_1) || manualAttack) && isGrounded && !altAttacking)
+                if((Input.GetButtonDown(GlobalStringVars.FIRE_1) || manualAttack) && isGrounded && !altAttacking && !isCrouching)
                 {
                     manualAttack = false;
                     animator.SetBool("Attack", true);
@@ -107,7 +108,7 @@ namespace Platformer.Inputs{
                 }
 
                 // tracking alternate fire button - alt attacking
-                if ((Input.GetButtonDown(GlobalStringVars.FIRE_2) || manualAltAttack) && isGrounded && !attacking)
+                if ((Input.GetButtonDown(GlobalStringVars.FIRE_2) || manualAltAttack) && isGrounded && !attacking && !isCrouching)
                 {
                     manualAltAttack = false;
                     animator.SetBool("AltAttack", true);
@@ -132,6 +133,7 @@ namespace Platformer.Inputs{
             manualAttack = false;
             manualAltAttack = false;
             manualJump = false;
+            isCrouching = animator.GetCurrentAnimatorStateInfo(0).IsName("SL_Knight_Croutch_Idle");
         }
 
         private void LateUpdate()

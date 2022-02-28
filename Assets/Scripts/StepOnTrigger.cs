@@ -1,4 +1,5 @@
 using UnityEngine;
+
 namespace Platformer.Inputs{
     public class StepOnTrigger : MonoBehaviour
     {
@@ -6,6 +7,7 @@ namespace Platformer.Inputs{
         [SerializeField] private Color steppedOnColor = Color.green;
         [SerializeField] private SpriteRenderer boxRenderer = null;
         [SerializeField] private LayerMask targetMask = 0;
+        [SerializeField] private Action [] actions = null;
         void Start()
         {
             boxRenderer.color = normalColor;
@@ -17,6 +19,13 @@ namespace Platformer.Inputs{
             {
                 // trigger on
                 boxRenderer.color = steppedOnColor;
+                if(actions != null)
+                {
+                    foreach (Action item in actions)
+                    {
+                        item.Activate();
+                    }
+                }
             }
         }
 
@@ -26,6 +35,13 @@ namespace Platformer.Inputs{
             {
                 // trigger off
                 boxRenderer.color = normalColor;
+                if(actions != null)
+                {
+                    foreach (Action item in actions)
+                    {
+                        item.Deactivate();
+                    }
+                }
             }
         }
     }

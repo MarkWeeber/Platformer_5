@@ -25,9 +25,11 @@ namespace Platformer.Inputs
         private int initialCamPriority = 0;
         private Collider2D coll = null;
         private bool Activated = false;
+        private ParallaxEffect parallaxEffect = null;
 
         void Start()
         {
+            parallaxEffect = GameObject.FindObjectOfType<ParallaxEffect>();
             coll = GetComponent<Collider2D>();
             travelTime = cBrain.m_DefaultBlend.m_Time;
             waypointsLength = waypoints.Length;
@@ -55,6 +57,10 @@ namespace Platformer.Inputs
                 initialCam.Priority = 0;
                 currentCam = waypoints[currentIndex].vcam;
                 currentCam.Priority = 1;
+                if(parallaxEffect != null)
+                {
+                    parallaxEffect.useFixedUpdate = false;
+                }
                 Invoke(nameof(ActivateNextWayPoint), travelTime);
             }
             // initiate failed
@@ -87,6 +93,10 @@ namespace Platformer.Inputs
                 letterBoxPanel.gameObject.SetActive(false);
                 inGamePanel.gameObject.SetActive(true);
                 playerInput.Activated = true;
+                if(parallaxEffect != null)
+                {
+                    parallaxEffect.useFixedUpdate = true;
+                }
                 Destroy(this);
             }
         }

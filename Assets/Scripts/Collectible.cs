@@ -7,9 +7,10 @@ namespace Platformer.Inputs
     {
         public enum CollectibleType
         {
-            GoldCoin, BlueGem
+            GoldCoin, BlueGem, Secret
         }
 
+        private Announcer announcer = null;
         public LayerMask targetMask = 0;
         public CollectibleType collectibleType;
         private GameManager gameManager = null;
@@ -17,7 +18,8 @@ namespace Platformer.Inputs
 
         void Start()
         {
-            gameManager = GameObject.FindObjectOfType<GameManager>();    
+            gameManager = GameObject.FindObjectOfType<GameManager>();
+            announcer = GetComponent<Announcer>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -33,6 +35,10 @@ namespace Platformer.Inputs
                         break;
                     case CollectibleType.BlueGem:
                         gameManager.BlueGemCounter++;
+                        break;
+                    case CollectibleType.Secret:
+                        gameManager.secretsFoundCounter++;
+                        announcer.Announce();
                         break;
                     default: break;
                 }

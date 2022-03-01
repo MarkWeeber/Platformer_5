@@ -44,6 +44,9 @@ namespace Platformer.Inputs
         [SerializeField] private CanvasRenderer gameOverMenu = null;
         [SerializeField] private Text fpsCounter = null;
         [SerializeField] private CanvasRenderer[] levelButtonsExceptForIntroLevel = null;
+        [SerializeField] private CanvasRenderer announcerPanel = null;
+        [SerializeField] private Text announcerText = null;
+        [SerializeField] private float announceTime = 6f;
         private ProgressData progressData = null;
         private int currentSceneIndex = 0;
         private int totalAmountOfScenes = 0;
@@ -179,6 +182,19 @@ namespace Platformer.Inputs
         {
             collectibleGoldCoinText.text = goldCointCounter.ToString();
             collectibleBlueGemText.text = blueGemCounter.ToString();
+        }
+
+        public void AnnounceMessage(string text)
+        {
+            announcerPanel.gameObject.SetActive(true);
+            announcerText.text = text;
+            Invoke(nameof(ResetAnnouncer), announceTime);
+        }
+
+        private void ResetAnnouncer()
+        {
+            announcerPanel.gameObject.SetActive(false);
+            announcerText.text = "";
         }
     }
 }

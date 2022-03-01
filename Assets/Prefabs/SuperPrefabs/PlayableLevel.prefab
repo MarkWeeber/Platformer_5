@@ -3625,6 +3625,9 @@ MonoBehaviour:
   gameOverMenu: {fileID: 8708798324645985036}
   fpsCounter: {fileID: 443877996}
   levelButtonsExceptForIntroLevel: []
+  announcerPanel: {fileID: 7858577046191431448}
+  announcerText: {fileID: 96787597179309111}
+  announceTime: 6
 --- !u!1 &1174662639486576979
 GameObject:
   m_ObjectHideFlags: 0
@@ -4998,7 +5001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8708798323274756016}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18147695, y: 1.8602748, z: -5}
+  m_LocalPosition: {x: 0.17529023, y: 1.8605298, z: -5}
   m_LocalScale: {x: 0.495, y: 0.495, z: 1}
   m_Children: []
   m_Father: {fileID: 5799025106873961780}
@@ -5277,7 +5280,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8708798323427718546}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18347538, y: 0.22904518, z: -5}
+  m_LocalPosition: {x: 0.17728913, y: 0.22904518, z: -5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 8708798323033838506}
@@ -6195,12 +6198,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 94.83592, y: 35.169548}
-      - {x: -14.013372, y: 35.12467}
+    - - {x: 96.88706, y: 35.214973}
+      - {x: -14.277378, y: 35.112667}
       - {x: -14.274878, y: -2.2867124}
       - {x: 6.43058, y: -2.2613432}
       - {x: 19.180738, y: -5.7081356}
-      - {x: 94.693565, y: -5.791829}
+      - {x: 96.94412, y: -5.541829}
 --- !u!1 &8708798324301344200
 GameObject:
   m_ObjectHideFlags: 0

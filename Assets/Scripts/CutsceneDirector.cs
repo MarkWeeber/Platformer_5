@@ -97,7 +97,7 @@ namespace Platformer.Inputs
                 {
                     parallaxEffect.useFixedUpdate = true;
                 }
-                Destroy(this);
+                Destroy(gameObject);
             }
         }
 

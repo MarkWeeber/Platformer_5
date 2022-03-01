@@ -164,7 +164,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -83204639
+  m_SortingLayerID: 1623948005
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: cd0e5d556c7c1cf40890ca9dcdbd5d6d,
@@ -215,7 +215,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.65, y: 0}
-    oldSize: {x: 1.6875, y: 2.9375}
+    oldSize: {x: 0.64285713, y: 1.1190476}
     newSize: {x: 0.27, y: 0.47}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -319,14 +319,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adfb782422272048b31bb94c2b55745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Activated: 1
   deadZone: 0.01
   isGrounded: 0
   groundedMask:
     serializedVersion: 2
     m_Bits: 768
-  overlapSphereExtension: 0.05
+  jumpOffMask:
+    serializedVersion: 2
+    m_Bits: 0
   playerAttack: {fileID: 434940418316444590}
   joystick: {fileID: 0}
+  overlapSphereExtension: 0.05
+  overlapSpherePosition: {x: 0, y: 0}
+  circleCollider2D: {fileID: 0}
+  timeToJumpOff: 0.5
 --- !u!114 &1155466841537125636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0b6f7be88b3364394e6117700f031d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthPoints: 100
   deathTime: 1.5
   maxHealth: 100
   uIHealthBar: {fileID: 0}
@@ -370,6 +378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7087571567406982729, guid: 6f40e22e3afc6a441b9be3317d93e746,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087571567406982729, guid: 6f40e22e3afc6a441b9be3317d93e746,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -385,6 +398,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7087571567406982729, guid: 6f40e22e3afc6a441b9be3317d93e746,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087571567406982729, guid: 6f40e22e3afc6a441b9be3317d93e746,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -397,16 +415,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7087571567406982729, guid: 6f40e22e3afc6a441b9be3317d93e746,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7087571567406982729, guid: 6f40e22e3afc6a441b9be3317d93e746,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7087571567406982729, guid: 6f40e22e3afc6a441b9be3317d93e746,
         type: 3}

@@ -5,10 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Damageable
-  - JoyStickThumbStick
-  - WorldAreaTag
-  - Triggers
   - Cutscene
+  - WorldAreaTag
   layers:
   - Default
   - TransparentFX
@@ -47,23 +45,23 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: BackGround
-    uniqueID: 2760487709
+    uniqueID: 8501807
     locked: 0
   - name: Level
-    uniqueID: 3473995201
+    uniqueID: 2861525525
     locked: 0
   - name: Objects
-    uniqueID: 2929636911
+    uniqueID: 1789497695
     locked: 0
   - name: Enemy
-    uniqueID: 3239331075
+    uniqueID: 2028837695
     locked: 0
   - name: Player
-    uniqueID: 4211762657
+    uniqueID: 1623948005
     locked: 0
   - name: ForeGround
-    uniqueID: 960644119
+    uniqueID: 4016339075
     locked: 0
   - name: UI
-    uniqueID: 3273559077
+    uniqueID: 1693828663
     locked: 0

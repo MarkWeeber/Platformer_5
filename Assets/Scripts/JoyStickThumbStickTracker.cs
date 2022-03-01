@@ -12,6 +12,7 @@ namespace Platformer.Inputs{
         private void Start()
         {
             canvasOriginalPosition = joystickThumbStick.gameObject.transform.position;
+            Debug.Log(gameObject.name);
         }
         void Update()
         {

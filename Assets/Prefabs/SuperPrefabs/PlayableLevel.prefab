@@ -3555,7 +3555,7 @@ MonoBehaviour:
   levelButtonsExceptForIntroLevel: []
   announcerPanel: {fileID: 7858577046191431448}
   announcerText: {fileID: 96787597179309111}
-  announceTime: 6
+  announceTime: 3
 --- !u!1 &1174662639486576979
 GameObject:
   m_ObjectHideFlags: 0

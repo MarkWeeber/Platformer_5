@@ -7946,6 +7946,11 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 246317189}
+    - target: {fileID: 5372409061217566565, guid: 5827f899470cf994b804b1f46620e7ae,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 3042575329308068553}
     - target: {fileID: 5845525846590901866, guid: 5827f899470cf994b804b1f46620e7ae,
         type: 3}
       propertyPath: m_Follow
@@ -8219,6 +8224,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81a39762286a59248b3a94534fed279c, type: 3}
+--- !u!4 &3042575329308068553 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3042575328881408461, guid: 81a39762286a59248b3a94534fed279c,
+    type: 3}
+  m_PrefabInstance: {fileID: 3042575329308068552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3139766325333225559
 PrefabInstance:
   m_ObjectHideFlags: 0

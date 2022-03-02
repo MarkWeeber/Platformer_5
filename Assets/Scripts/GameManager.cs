@@ -50,6 +50,7 @@ namespace Platformer.Inputs
         private ProgressData progressData = null;
         private int currentSceneIndex = 0;
         private int totalAmountOfScenes = 0;
+        private int totalAmountOfSecrets, totalAmountOfCollectibles, totalAmountOfEnemies = 0;
 
         private void Start()
         {
@@ -97,6 +98,22 @@ namespace Platformer.Inputs
                 }
             }
             Time.timeScale = 1;
+            // getting total ammount of enemies, secrets and collectibles
+            Component[] _amount = FindObjectsOfType<Collectible>();
+            foreach (Collectible _item in _amount)
+            {
+                if(_item.collectibleType == Collectible.CollectibleType.Secret)
+                {
+                    totalAmountOfSecrets++;
+                }
+                else
+                {
+                    totalAmountOfCollectibles++;
+                }
+            }
+            _amount = FindObjectsOfType<EnemySimpleAI>();
+            totalAmountOfEnemies = _amount.Length;
+            _amount = null;
         }
 
         private void UpdateFPS()
@@ -151,9 +168,9 @@ namespace Platformer.Inputs
 
         public void LevelComplete()
         {
-            coinsCountTextSuccess.text = collectiblesTotalCounter.ToString();
-            enemySlayCountTextSuccess.text = enemySlayCounter.ToString();
-            secretsCountsTextSuccess.text = secretsFoundCounter.ToString();
+            coinsCountTextSuccess.text = collectiblesTotalCounter.ToString() + " / " + totalAmountOfCollectibles.ToString();
+            enemySlayCountTextSuccess.text = enemySlayCounter.ToString() + " / " + totalAmountOfEnemies.ToString();
+            secretsCountsTextSuccess.text = secretsFoundCounter.ToString() + " / " + totalAmountOfSecrets.ToString();
             Time.timeScale = 0;
             inGameMenu.gameObject.SetActive(false);
             creditsMenu.gameObject.SetActive(true);
@@ -161,9 +178,9 @@ namespace Platformer.Inputs
 
         public void GameOver()
         {
-            coinsCountTextGameOver.text = collectiblesTotalCounter.ToString();
-            enemySlayCountTextGameOver.text = enemySlayCounter.ToString();
-            secretsCountsTextGameOver.text = secretsFoundCounter.ToString();
+            coinsCountTextGameOver.text = collectiblesTotalCounter.ToString() + " / " + totalAmountOfCollectibles.ToString();
+            enemySlayCountTextGameOver.text = enemySlayCounter.ToString() + " / " + totalAmountOfEnemies.ToString();
+            secretsCountsTextGameOver.text = secretsFoundCounter.ToString() + " / " + totalAmountOfSecrets.ToString();
             Time.timeScale = 0;
             inGameMenu.gameObject.SetActive(false);
             gameOverMenu.gameObject.SetActive(true);

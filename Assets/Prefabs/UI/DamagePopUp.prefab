@@ -189,3 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2a02f417b67fc40bee9da058021ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeTime: 1
+  moveSpeed: 3
+  fadeSpeed: 1
+  Offset: {x: 0, y: 2, z: 0}

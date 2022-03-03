@@ -15,7 +15,7 @@ namespace Platformer.Inputs
         private Health health = null;
         private Rigidbody2D rb = null;
         private Collider2D coll2D = null;
-
+        //private ExplosionEffect explosionEffect = null;
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -36,6 +36,11 @@ namespace Platformer.Inputs
             }
             if((hitableLayerMask.value & (1 << collider.transform.gameObject.layer)) > 0)
             {
+                // explosionEffect = collider.transform.gameObject.GetComponent<ExplosionEffect>();
+                // if(explosionEffect != null)
+                // {
+                //     explosionEffect.Explode();
+                // }
                 animator.SetTrigger("Hit");
                 Destroy(this.gameObject, destroyTime);
                 rb.velocity = Vector2.zero;

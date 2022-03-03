@@ -9,15 +9,19 @@ namespace Platformer.Inputs
         public float healthPoints = 100f;
         [SerializeField] private float deathTime = 1.5f;
         [SerializeField] private float maxHealth = 100f;
+        [SerializeField] private float staggerDamage = 20f;
+        [SerializeField] private float staggerAccumulateTimer = 2f;
         [SerializeField] private UIHealthBar uIHealthBar = null;
         [SerializeField] private CanvasRenderer pauseMenu = null;
         [SerializeField] private Transform healthBar = null;
         [SerializeField] private SpriteRenderer spriteRenderer = null;
         [SerializeField] private Color[] takeDamageColors = null;
         [SerializeField] private Color[] healUpColors = null;
-        [SerializeField] private GameManager gameManager = null;
+        private GameManager gameManager = null;
         private EnemySimpleAI enemySimpleAI = null;
         private float healthBarX = 0f;
+        private float staggerDamageAccumulation = 0f;
+        private float staggerDamageResetTimer = 0f;
         private Animator animator = null;
         private PlayerInput playerInput = null;
         private bool isAlive = true;
@@ -34,6 +38,11 @@ namespace Platformer.Inputs
                 healthBarX = healthBar.localScale.x;
             }
         }
+
+        private void Start()
+        {
+            gameManager = GameObject.FindObjectOfType<GameManager>();
+        }
         public float HealthPoints
         {
             get {return healthPoints;}
@@ -43,12 +52,22 @@ namespace Platformer.Inputs
         public void ModifyHealth(float delta)
         {
             healthPoints += delta;
+            staggerDamageAccumulation += delta;
+            staggerDamageResetTimer = staggerAccumulateTimer;
+            // damage counter
+            DamagePopUp.Create(this.transform.position, delta);
+            //GameAssets.instance.PopUpDamageCounter(this.transform.position, delta);
             if(healthPoints > 0 && isAlive)
             {
                 if (delta < 0 && enemySimpleAI != null)
                 {
-                    enemySimpleAI.OnTakeDamage();
+                    enemySimpleAI.OnTakeDamage((Mathf.Abs(staggerDamageAccumulation) > staggerDamage));
                 }
+            }
+            if(Mathf.Abs(staggerDamageAccumulation) > staggerDamage)
+            {
+                staggerDamageAccumulation = 0f;
+                staggerDamageResetTimer = 0f;
             }
             if(healthPoints < 0 && isAlive)
             {
@@ -116,6 +135,18 @@ namespace Platformer.Inputs
             {
                 spriteRenderer.material.color = healUpColors[healUpColors.Length - animateHeal];
                 animateHeal--;
+            }
+        }
+
+        private void Update()
+        {
+            if(staggerDamageResetTimer > 0f)
+            {
+                staggerDamageResetTimer -= Time.deltaTime;
+            }
+            if(staggerDamageResetTimer < 0f)
+            {
+                staggerDamageAccumulation = 0f;
             }
         }
     }

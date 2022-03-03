@@ -3556,6 +3556,8 @@ MonoBehaviour:
   announcerPanel: {fileID: 7858577046191431448}
   announcerText: {fileID: 96787597179309111}
   announceTime: 3
+  damageCounterTextPrefab: {fileID: 7779615654881622384, guid: 9faf1b84c39147444a49ada7154c8966,
+    type: 3}
 --- !u!1 &1174662639486576979
 GameObject:
   m_ObjectHideFlags: 0
@@ -3927,7 +3929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: 10.000061}
   m_SizeDelta: {x: 1930, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8790639113617947813
@@ -4079,7 +4081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -10}
+  m_AnchoredPosition: {x: 0, y: -10.000061}
   m_SizeDelta: {x: 1930, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2293061922552481378
@@ -4327,7 +4329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireBallCastSpeed: 10
-  damageDeal: 15
+  damageDeal: 2
   rightCast: {fileID: 8708798323342215400}
   leftCast: {fileID: 8708798323286743343}
   fireballPrefab: {fileID: 3099156395569954437, guid: 3bdf615cabd5dfb4b93e4ee082f45b4f,
@@ -4685,6 +4687,8 @@ MonoBehaviour:
   healthPoints: 100
   deathTime: 1.5
   maxHealth: 100
+  staggerDamage: 20
+  staggerAccumulateTimer: 2
   uIHealthBar: {fileID: 1174662638045113258}
   pauseMenu: {fileID: 0}
   healthBar: {fileID: 0}
@@ -4699,7 +4703,6 @@ MonoBehaviour:
   - {r: 0.08218726, g: 0.38679248, b: 0, a: 1}
   - {r: 0.17723632, g: 1, b: 0, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
-  gameManager: {fileID: 1174662638652069530}
 --- !u!1 &8708798323126498544
 GameObject:
   m_ObjectHideFlags: 0
@@ -4916,7 +4919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8708798323274756016}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15196878, y: 1.861491, z: -5}
+  m_LocalPosition: {x: 0.15577388, y: 1.8613341, z: -5}
   m_LocalScale: {x: 0.495, y: 0.495, z: 1}
   m_Children: []
   m_Father: {fileID: 5799025106873961780}
@@ -5194,7 +5197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8708798323427718546}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15396911, y: 0.22904518, z: -5}
+  m_LocalPosition: {x: 0.1577735, y: 0.22904518, z: -5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 8708798323033838506}

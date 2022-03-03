@@ -155,3 +155,6 @@ MonoBehaviour:
   hitMask:
     serializedVersion: 2
     m_Bits: 196608
+  explosionAreaDamage: 15
+  explosionAreaRadius: 2.8
+  explosionDelayTime: 0.1

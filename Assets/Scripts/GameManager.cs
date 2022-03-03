@@ -1,6 +1,8 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Platformer.Inputs
 {
@@ -46,11 +48,12 @@ namespace Platformer.Inputs
         [SerializeField] private CanvasRenderer[] levelButtonsExceptForIntroLevel = null;
         [SerializeField] private CanvasRenderer announcerPanel = null;
         [SerializeField] private Text announcerText = null;
-        [SerializeField] private float announceTime = 6f;
+        [SerializeField] private float announceTime = 2f;
         private ProgressData progressData = null;
         private int currentSceneIndex = 0;
         private int totalAmountOfScenes = 0;
         private int totalAmountOfSecrets, totalAmountOfCollectibles, totalAmountOfEnemies = 0;
+        private Dictionary<Health, Text> damageCounterDict = new Dictionary<Health, Text>();
 
         private void Start()
         {
@@ -213,5 +216,33 @@ namespace Platformer.Inputs
             announcerPanel.gameObject.SetActive(false);
             announcerText.text = "";
         }
+        // public void DamageDealCounter(Health health, Vector3 worldPosition, float counterValue)
+        // {
+        //     Text _text = null;
+        //     damageCounterDict.TryGetValue(health, out _text);
+        //     if(_text != null)
+        //     {
+        //         _text.text = counterValue.ToString();
+        //         _text.color = (counterValue > 0)?Color.green:Color.red;
+        //         Vector2 viewPortPoint = Camera.main.WorldToViewportPoint(worldPosition);
+        //         _text.rectTransform.anchoredPosition = viewPortPoint;
+        //         //_text.rectTransform.anchorMin = viewPortPoint;
+        //         //_text.rectTransform.anchorMax = viewPortPoint;
+        //     }
+        //     else
+        //     {
+        //         _damageCounterTextPrefab = Instantiate(damageCounterTextPrefab);
+        //         _damageCounterTextPrefab.transform.SetParent(this.transform, true);
+        //         _text = _damageCounterTextPrefab.GetComponent<Text>();
+        //         _text.text = counterValue.ToString();
+        //         _text.color = (counterValue > 0)?Color.green:Color.red;
+        //         Vector2 viewPortPoint = Camera.main.WorldToViewportPoint(worldPosition);
+        //         print(viewPortPoint);
+        //         _text.rectTransform.anchoredPosition = viewPortPoint;
+        //         //_text.rectTransform.anchorMin = viewPortPoint;
+        //         //_text.rectTransform.anchorMax = viewPortPoint;
+        //         damageCounterDict.Add(health, _text);
+        //     }
+        // }
     }
 }

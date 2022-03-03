@@ -218,11 +218,14 @@ namespace Platformer.Inputs{
             Destroy(healthBar.gameObject);
         }
 
-        public void OnTakeDamage()
+        public void OnTakeDamage(bool stagger = true)
         {
             state = EnemySimpleAIState.Stagger;
-            animator.SetTrigger("TakeHit");
-            staggerTimer = staggerTime;
+            if(stagger)
+            {
+                animator.SetTrigger("TakeHit");
+                staggerTimer = staggerTime;
+            }
         }
     }
 }

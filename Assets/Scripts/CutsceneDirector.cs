@@ -56,7 +56,7 @@ namespace Platformer.Inputs
                 coll.enabled = false;
                 initialCam.Priority = 0;
                 currentCam = waypoints[currentIndex].vcam;
-                currentCam.Priority = 1;
+                currentCam.Priority = 10;
                 if(parallaxEffect != null)
                 {
                     parallaxEffect.overrideUseFixedUpdate = false;
@@ -80,7 +80,7 @@ namespace Platformer.Inputs
                 currentCam.Priority = 0;
                 currentIndex++;
                 currentCam = waypoints[currentIndex].vcam;
-                currentCam.Priority = 1;;
+                currentCam.Priority = 10;
                 Invoke(nameof(ActivateNextWayPoint), travelTime);
             }
             // last waypoint
@@ -89,7 +89,7 @@ namespace Platformer.Inputs
                 announcerPanel.gameObject.SetActive(false);
                 announceText.text = "";
                 initialCam.Priority = initialCamPriority;
-                currentCam.Priority = 0;
+                currentCam.Priority = 10;
                 letterBoxPanel.gameObject.SetActive(false);
                 inGamePanel.gameObject.SetActive(true);
                 playerInput.Activated = true;

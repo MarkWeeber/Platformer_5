@@ -444,6 +444,8 @@ MonoBehaviour:
   healthPoints: 100
   deathTime: 3
   maxHealth: 100
+  staggerDamage: 20
+  staggerAccumulateTimer: 2
   uIHealthBar: {fileID: 0}
   pauseMenu: {fileID: 0}
   healthBar: {fileID: 4441535202483445369}
@@ -504,12 +506,12 @@ MonoBehaviour:
   - {fileID: 3852912476933124354}
   - {fileID: 3852912475489542301}
   - {fileID: 3852912475147884775}
-  waitAtWaipointTime: 3.5
-  minDistanceToWaipoint: 0.05
+  waitAtWaipointTime: 1
+  minDistanceToWaipoint: 0.5
   minDistanceToTarget: 3
   alertCooldown: 7
-  patrolSpeed: 2
-  chasingSpeed: 4
+  patrolSpeed: 6
+  chasingSpeed: 12
   attackTime: 1
   staggerTime: 0.6
   attacker: {fileID: 4441535202577373255}

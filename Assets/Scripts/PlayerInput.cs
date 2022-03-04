@@ -18,7 +18,8 @@ namespace Platformer.Inputs{
         [SerializeField] private float timeToJumpOff = 0.5f;
         [SerializeField] private Transform freeLookTransform = null;
         [SerializeField] private float freeLookSpeedRatio = 0.3f;
-        private CinemachineVirtualCamera currentCam = null;
+        [SerializeField] private CinemachineVirtualCamera currentCam = null;
+        [SerializeField] private CinemachineVirtualCamera freeLookCam = null;
         private float horizontalInput = 0f;
         private float verticalInput = 0f;
         private float manualHorizontalInputLeft = 0f;
@@ -50,7 +51,6 @@ namespace Platformer.Inputs{
             playerLayer = LayerMask.NameToLayer(GlobalStringVars.PLAYER_LAYER);
             groundJumpOffLayer = LayerMask.NameToLayer(GlobalStringVars.GROUND_JUMP_OFF_LAYER);
             actualMask = groundedMask;
-            currentCam = transform.parent.parent.GetComponentInChildren<CinemachineVirtualCamera>();
         }
 
         void Update()
@@ -80,7 +80,7 @@ namespace Platformer.Inputs{
                 else
                 {
                     // making player either move either crouch
-                    if(Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput))
+                    if(verticalInput < Mathf.Abs(horizontalInput) * -1)
                     {
                         horizontalInput = 0;
                     }
@@ -294,12 +294,18 @@ namespace Platformer.Inputs{
         {
             freeLook = true;
             currentCam.Follow = freeLookTransform;
+            freeLookTransform.position = transform.position;
+            currentCam.Priority = 5;
+            freeLookCam.Priority = 10;
         }
 
         public void FreeLookExit()
         {
             freeLook = false; 
             currentCam.Follow = this.transform;
+            freeLookTransform.position = transform.position;
+            currentCam.Priority = 5;
+            freeLookCam.Priority = 10;
         }
     }
 }

@@ -41,7 +41,7 @@ public class ParallaxEffect : MonoBehaviour
     private void CheckFPS()
     {
         float fps = (int)(1f / Time.unscaledDeltaTime);
-        if (fps < 58)
+        if (fps < 40)
         {
             _useFixedUpdate = false;
         }

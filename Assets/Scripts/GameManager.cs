@@ -68,7 +68,7 @@ namespace Platformer.Inputs
             #endif
             if(fpsCounter != null)
             {
-                InvokeRepeating("UpdateFPS", 1, 1);
+                InvokeRepeating(nameof(UpdateFPS), 1, 1);
             }
             // managing save system
             progressData = SaveSystem.LoadProgress();

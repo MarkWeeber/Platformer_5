@@ -17,7 +17,7 @@ namespace Platformer.Inputs
         [SerializeField] private SpriteRenderer spriteRenderer = null;
         [SerializeField] private Color[] takeDamageColors = null;
         [SerializeField] private Color[] healUpColors = null;
-        private GameManager gameManager = null;
+        [SerializeField] private GameManager gameManager = null;
         private EnemySimpleAI enemySimpleAI = null;
         private float healthBarX = 0f;
         private float staggerDamageAccumulation = 0f;
@@ -39,10 +39,6 @@ namespace Platformer.Inputs
             }
         }
 
-        private void Start()
-        {
-            gameManager = GameObject.FindObjectOfType<GameManager>();
-        }
         public float HealthPoints
         {
             get {return healthPoints;}

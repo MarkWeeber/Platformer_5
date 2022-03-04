@@ -464,7 +464,7 @@ PrefabInstance:
     - target: {fileID: 8423029567241865145, guid: 3b53162b0bb9d574d8708240400dbc62,
         type: 3}
       propertyPath: m_Text
-      value: 4
+      value: BOSS
       objectReference: {fileID: 0}
     - target: {fileID: 8423029567349230705, guid: 3b53162b0bb9d574d8708240400dbc62,
         type: 3}

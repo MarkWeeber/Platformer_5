@@ -9,7 +9,23 @@ public class ParallaxEffect : MonoBehaviour
     private Vector3 [] initialPositions = null;
     private Vector3 initialCameraPosition = Vector3.zero;
     private int size = 0;
-    public bool useFixedUpdate = true;
+    public bool overrideUseFixedUpdate
+    {
+        get{ return _useFixedUpdate;}
+        set
+        {
+            _useFixedUpdate = value;
+            if(!value)
+            {
+                CancelInvoke(nameof(CheckFPS));
+            }
+            else
+            {
+                InvokeRepeating(nameof(CheckFPS), 1, 1);
+            }
+        }
+    }
+    public bool _useFixedUpdate = true;
     void Start()
     {
         size = backgrounds.Length;
@@ -19,11 +35,24 @@ public class ParallaxEffect : MonoBehaviour
         {
             initialPositions[i] = backgrounds[i].position;
         }
+        InvokeRepeating(nameof(CheckFPS), 1, 1);
     }
 
-    void FixedUpdate()
+    private void CheckFPS()
     {
-        if(useFixedUpdate)
+        float fps = (int)(1f / Time.unscaledDeltaTime);
+        if (fps < 58)
+        {
+            _useFixedUpdate = false;
+        }
+        else
+        {
+            _useFixedUpdate = true;
+        }
+    }
+    private void FixedUpdate()
+    {
+        if(_useFixedUpdate)
         {
             for (int i = 0; i < size; i++)
             {
@@ -32,9 +61,9 @@ public class ParallaxEffect : MonoBehaviour
         }
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if(!useFixedUpdate)
+        if(!_useFixedUpdate)
         {
             for (int i = 0; i < size; i++)
             {

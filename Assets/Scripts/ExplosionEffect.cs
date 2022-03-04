@@ -8,16 +8,20 @@ namespace Platformer.Inputs{
         [SerializeField] private Transform prefabTransform = null;
         [SerializeField] private LayerMask hitMask;
         [SerializeField] private float explosionAreaDamage = 15f;
+        [SerializeField] private float explosionAreaPushForce = 90f;
         [SerializeField] private float explosionAreaRadius = 2f;
         [SerializeField] private float explosionDelayTime = 0.2f;
         private Transform prefabClone = null;
         private CircleCollider2D coll = null;
         private Collider2D[] affectedByExposion = null;
         private Health health = null;
+        private PointEffector2D pointEffector2D = null;
         public void Explode()
         {
             prefabClone = Instantiate(prefabTransform, this.transform.position, Quaternion.identity);
             coll = prefabClone.GetComponent<CircleCollider2D>();
+            pointEffector2D = prefabClone.GetComponent<PointEffector2D>();
+            pointEffector2D.forceMagnitude = explosionAreaPushForce;
             coll.radius = explosionAreaRadius;
             affectedByExposion = Physics2D.OverlapCircleAll(this.transform.position, explosionAreaRadius);
             foreach (Collider2D item in affectedByExposion)

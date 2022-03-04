@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 namespace Platformer.Inputs{
     [RequireComponent(typeof(PlayerMovement))]
@@ -15,6 +16,9 @@ namespace Platformer.Inputs{
         [SerializeField] private Vector2 overlapSpherePosition = Vector2.zero;
         [SerializeField] private CircleCollider2D circleCollider2D = null;
         [SerializeField] private float timeToJumpOff = 0.5f;
+        [SerializeField] private Transform freeLookTransform = null;
+        [SerializeField] private float freeLookSpeedRatio = 0.3f;
+        private CinemachineVirtualCamera currentCam = null;
         private float horizontalInput = 0f;
         private float verticalInput = 0f;
         private float manualHorizontalInputLeft = 0f;
@@ -30,6 +34,7 @@ namespace Platformer.Inputs{
         private bool manualAltAttack = false;
         private bool manualJump = false;
         private bool isCrouching = false;
+        private bool freeLook = false;
         private Vector2 overlapCircleTransform = Vector2.zero;
         private int playerLayer;
         private int groundJumpOffLayer;
@@ -45,7 +50,9 @@ namespace Platformer.Inputs{
             playerLayer = LayerMask.NameToLayer(GlobalStringVars.PLAYER_LAYER);
             groundJumpOffLayer = LayerMask.NameToLayer(GlobalStringVars.GROUND_JUMP_OFF_LAYER);
             actualMask = groundedMask;
+            currentCam = transform.parent.parent.GetComponentInChildren<CinemachineVirtualCamera>();
         }
+
         void Update()
         {
             if(Activated)
@@ -65,63 +72,71 @@ namespace Platformer.Inputs{
                 verticalInput += Input.GetAxisRaw(GlobalStringVars.VERTICAL_AXIS);
                 verticalInput += joystick.Vertical;
                 verticalInput = Mathf.Clamp(verticalInput, -1f, 1f);
-                // making player either move either crouch
-                if(Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput))
+                // freelook feature
+                if(freeLook)
                 {
-                    horizontalInput = 0;
+                    freeLookTransform.position += new Vector3(horizontalInput * freeLookSpeedRatio, verticalInput * freeLookSpeedRatio, freeLookTransform.position.z);
                 }
                 else
                 {
-                    verticalInput = 0;
-                }
+                    // making player either move either crouch
+                    if(Mathf.Abs(verticalInput) > Mathf.Abs(horizontalInput))
+                    {
+                        horizontalInput = 0;
+                    }
+                    else
+                    {
+                        verticalInput = 0;
+                    }
 
-                // tracking jump
-                if((Input.GetButtonDown(GlobalStringVars.JUMP_BUTTON) || manualJump) && isGrounded && !attacking && !altAttacking)
-                {
-                    if(isCrouching)
+                    // tracking jump
+                    if((Input.GetButtonDown(GlobalStringVars.JUMP_BUTTON) || manualJump) && isGrounded && !attacking && !altAttacking)
                     {
-                        JumpOff();
+                        if(isCrouching)
+                        {
+                            JumpOff();
+                        }
+                        else
+                        {
+                            manualJump = false;
+                            jumpButtonPressed = true;
+                            animator.SetBool("MakeJump", true);
+                        }
                     }
-                    else
+                    // tracking fire button - attacking
+                    if((Input.GetButtonDown(GlobalStringVars.FIRE_1) || manualAttack) && isGrounded && !altAttacking && !isCrouching)
                     {
-                        manualJump = false;
-                        jumpButtonPressed = true;
-                        animator.SetBool("MakeJump", true);
+                        manualAttack = false;
+                        animator.SetBool("Attack", true);
+                        attacking = true;
+                        horizontalInput = 0;
+                        rigidBody.velocity = Vector3.zero;
+                        if (spriteRenderer.flipX)
+                        {
+                            playerAttack.LeftSwing();
+                        }
+                        else
+                        {
+                            playerAttack.RightSwing();
+                        }
                     }
-                }
-                // tracking fire button - attacking
-                if((Input.GetButtonDown(GlobalStringVars.FIRE_1) || manualAttack) && isGrounded && !altAttacking && !isCrouching)
-                {
-                    manualAttack = false;
-                    animator.SetBool("Attack", true);
-                    attacking = true;
-                    horizontalInput = 0;
-                    rigidBody.velocity = Vector3.zero;
-                    if (spriteRenderer.flipX)
-                    {
-                        playerAttack.LeftSwing();
-                    }
-                    else
-                    {
-                        playerAttack.RightSwing();
-                    }
-                }
 
-                // tracking alternate fire button - alt attacking
-                if ((Input.GetButtonDown(GlobalStringVars.FIRE_2) || manualAltAttack) && isGrounded && !attacking && !isCrouching)
-                {
-                    manualAltAttack = false;
-                    animator.SetBool("AltAttack", true);
-                    altAttacking = true;
-                    horizontalInput = 0;
-                    rigidBody.velocity = Vector3.zero;
-                    if (spriteRenderer.flipX)
+                    // tracking alternate fire button - alt attacking
+                    if ((Input.GetButtonDown(GlobalStringVars.FIRE_2) || manualAltAttack) && isGrounded && !attacking && !isCrouching)
                     {
-                        playerAttack.LeftCast();
-                    }
-                    else
-                    {
-                        playerAttack.RightCast();
+                        manualAltAttack = false;
+                        animator.SetBool("AltAttack", true);
+                        altAttacking = true;
+                        horizontalInput = 0;
+                        rigidBody.velocity = Vector3.zero;
+                        if (spriteRenderer.flipX)
+                        {
+                            playerAttack.LeftCast();
+                        }
+                        else
+                        {
+                            playerAttack.RightCast();
+                        }
                     }
                 }
             }
@@ -155,36 +170,39 @@ namespace Platformer.Inputs{
             {
                 animator.SetBool("StandingOnGround", false);
             }
-            // moving
-            if(Mathf.Abs(horizontalInput) > deadZone && !attacking && !altAttacking)
+            // moving only when not freelooking
+            if(!freeLook)
             {
-                playerMovement.Move(horizontalInput);
-                if(horizontalInput > 0)
+                // moving
+                if(Mathf.Abs(horizontalInput) > deadZone && !attacking && !altAttacking)
                 {
-                    spriteRenderer.flipX = false;
+                    playerMovement.Move(horizontalInput);
+                    if(horizontalInput > 0)
+                    {
+                        spriteRenderer.flipX = false;
+                    }
+                    else
+                    {
+                        spriteRenderer.flipX = true;
+                    }
+                    animator.SetBool("Running", true);
                 }
                 else
                 {
-                    spriteRenderer.flipX = true;
+                    animator.SetBool("Running", false);
                 }
-                animator.SetBool("Running", true);
-            }
-            else
-            {
-                animator.SetBool("Running", false);
-            }
-            // jumping
-            if(jumpButtonPressed)
-            {
-                playerMovement.Jump();
-                jumpButtonPressed = false;
-            }
-            // apply vertical speed
-            animator.SetFloat("VerticalSpeed", rigidBody.velocity.y);
+                // jumping
+                if(jumpButtonPressed)
+                {
+                    playerMovement.Jump();
+                    jumpButtonPressed = false;
+                }
+                // apply vertical speed
+                animator.SetFloat("VerticalSpeed", rigidBody.velocity.y);
 
-            // apply vertical input
-            animator.SetFloat("VerticalInput", verticalInput);
-
+                // apply vertical input
+                animator.SetFloat("VerticalInput", verticalInput);
+            }
             // manage jump offs
             if (jumpOffTimer == timeToJumpOff)
             {
@@ -270,6 +288,18 @@ namespace Platformer.Inputs{
             }
             Gizmos.DrawWireSphere (
                 overlapCircleTransform, radius);
+        }
+
+        public void FreeLookEnter()
+        {
+            freeLook = true;
+            currentCam.Follow = freeLookTransform;
+        }
+
+        public void FreeLookExit()
+        {
+            freeLook = false; 
+            currentCam.Follow = this.transform;
         }
     }
 }

@@ -59,7 +59,7 @@ namespace Platformer.Inputs
                 currentCam.Priority = 1;
                 if(parallaxEffect != null)
                 {
-                    parallaxEffect.useFixedUpdate = false;
+                    parallaxEffect.overrideUseFixedUpdate = false;
                 }
                 Invoke(nameof(ActivateNextWayPoint), travelTime);
             }
@@ -95,7 +95,7 @@ namespace Platformer.Inputs
                 playerInput.Activated = true;
                 if(parallaxEffect != null)
                 {
-                    parallaxEffect.useFixedUpdate = true;
+                    parallaxEffect.overrideUseFixedUpdate = true;
                 }
                 Destroy(gameObject);
             }

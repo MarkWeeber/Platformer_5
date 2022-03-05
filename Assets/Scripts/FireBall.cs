@@ -44,6 +44,7 @@ namespace Platformer.Inputs
                 animator.SetTrigger("Hit");
                 Destroy(this.gameObject, destroyTime);
                 rb.velocity = Vector2.zero;
+                rb.gravityScale = 0;
                 coll2D.enabled = false;
             }
         }

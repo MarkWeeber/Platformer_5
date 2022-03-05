@@ -22,6 +22,8 @@ namespace Platformer.Inputs
         [SerializeField] private float autoAttackTimer = 5f;
         [SerializeField] private DamageDealerOnTouch rightDamageDealerOnTouch = null;
         [SerializeField] private DamageDealerOnTouch lefttDamageDealerOnTouch = null;
+        [SerializeField] private Vector2 rightCastDirection = Vector2.right;
+        [SerializeField] private Vector2 leftCastDirection = Vector2.left;
         private FireBall fireBall = null;
         private float timer = 0f;
         private bool rightDamageDealerEnabled = false;
@@ -56,7 +58,7 @@ namespace Platformer.Inputs
                             fireBall = prefabInstance.GetComponent<FireBall>();
                             fireBall.damage = damageDeal;
                             rb = prefabInstance.GetComponent<Rigidbody2D>();
-                            rb.velocity = Vector2.right * fireBallCastSpeed;
+                            rb.velocity = rightCastDirection * fireBallCastSpeed;
                             break;
                         case AutoAttackMode.leftCast:
                             prefabInstance = Instantiate(fireballPrefab, leftCast.position, Quaternion.identity);
@@ -64,7 +66,7 @@ namespace Platformer.Inputs
                             fireBall.damage = damageDeal;
                             prefabInstance.GetComponent<SpriteRenderer>().flipX = true;
                             rb = prefabInstance.GetComponent<Rigidbody2D>();
-                            rb.velocity = Vector2.left * fireBallCastSpeed;
+                            rb.velocity = leftCastDirection * fireBallCastSpeed;
                             break;
                         default:
                             break;
@@ -108,7 +110,7 @@ namespace Platformer.Inputs
             fireBall.damage = damageDeal;
             prefabInstance.GetComponent<SpriteRenderer>().flipX = true;
             rb = prefabInstance.GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.left * fireBallCastSpeed;
+            rb.velocity = leftCastDirection * fireBallCastSpeed;
         }
 
         public void RightCast()
@@ -117,7 +119,7 @@ namespace Platformer.Inputs
             fireBall = prefabInstance.GetComponent<FireBall>();
             fireBall.damage = damageDeal;
             rb = prefabInstance.GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.right * fireBallCastSpeed;
+            rb.velocity = rightCastDirection * fireBallCastSpeed;
         }
 
         public void LeftSwing()

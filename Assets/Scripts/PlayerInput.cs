@@ -75,7 +75,7 @@ namespace Platformer.Inputs{
                 // freelook feature
                 if(freeLook)
                 {
-                    freeLookTransform.position += new Vector3(horizontalInput * freeLookSpeedRatio, verticalInput * freeLookSpeedRatio, freeLookTransform.position.z);
+                    //freeLookTransform.position += new Vector3(horizontalInput * freeLookSpeedRatio, verticalInput * freeLookSpeedRatio, freeLookTransform.position.z);
                 }
                 else
                 {
@@ -202,6 +202,10 @@ namespace Platformer.Inputs{
 
                 // apply vertical input
                 animator.SetFloat("VerticalInput", verticalInput);
+            }
+            else
+            {
+                freeLookTransform.position += new Vector3(horizontalInput * freeLookSpeedRatio, verticalInput * freeLookSpeedRatio, freeLookTransform.position.z);
             }
             // manage jump offs
             if (jumpOffTimer == timeToJumpOff)

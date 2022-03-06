@@ -32,6 +32,7 @@ namespace Platformer.Inputs
                 }
         }
 
+        [Tooltip("Limit FPS, 0 - no limit")]
         [SerializeField] private int targetFPS = 60;
         [SerializeField] private Text coinsCountTextSuccess = null;
         [SerializeField] private Text enemySlayCountTextSuccess = null;

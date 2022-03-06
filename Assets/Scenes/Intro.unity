@@ -1068,6 +1068,11 @@ PrefabInstance:
       propertyPath: backgrounds.Array.data[2]
       value: 
       objectReference: {fileID: 1838960237}
+    - target: {fileID: 1174662638652069530, guid: 2c325c8884032c3418b1f269eada73c5,
+        type: 3}
+      propertyPath: targetFPS
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 2103277014749006970, guid: 2c325c8884032c3418b1f269eada73c5,
         type: 3}
       propertyPath: m_Name

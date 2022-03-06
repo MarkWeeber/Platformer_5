@@ -58,6 +58,8 @@ MonoBehaviour:
   autoAttackTimer: 4
   rightDamageDealerOnTouch: {fileID: 3144552977410682176}
   lefttDamageDealerOnTouch: {fileID: 3144552977644671167}
+  rightCastDirection: {x: 1, y: 0}
+  leftCastDirection: {x: -1, y: 0}
 --- !u!1 &3144552977410682178
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,8 +512,8 @@ MonoBehaviour:
   minDistanceToWaipoint: 0.5
   minDistanceToTarget: 3
   alertCooldown: 7
-  patrolSpeed: 6
-  chasingSpeed: 12
+  patrolSpeed: 3
+  chasingSpeed: 6
   attackTime: 1
   staggerTime: 0.6
   attacker: {fileID: 4441535202577373255}

@@ -1,7 +1,7 @@
 # 2D platformer
 
 A simple game with following features:
-- Fantasy medievel style
+- Fantasy medieval style
 - Pixel art
 - Combat with enemies
 - Platforming, jump pads, wind areas
